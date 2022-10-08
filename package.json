@@ -1,0 +1,33 @@
+{
+  "name": "obsidian-publish-to-unstorage-astro-ui",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astro-auth/cli": "^1.2.5",
+    "@astro-auth/client": "^1.0.5",
+    "@astro-auth/core": "^1.0.12",
+    "@astro-auth/providers": "^1.0.6",
+    "@astrojs/node": "^1.1.0",
+    "@astrojs/react": "^1.1.4",
+    "@astrojs/tailwind": "^2.0.2",
+    "@tailwindcss/typography": "^0.5.7",
+    "astro": "^1.4.2",
+    "base-62.js": "^0.9.9",
+    "npx": "^10.2.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rehype-sanitize": "^5.0.1",
+    "remark": "^14.0.2",
+    "tailwindcss": "^3.1.8",
+    "unstorage": "^0.5.6",
+    "unstorage-driver-http-headers": "^0.1.5"
+  }
+}

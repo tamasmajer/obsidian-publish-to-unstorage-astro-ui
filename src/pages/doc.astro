@@ -1,0 +1,36 @@
+---
+import { getUser } from "@astro-auth/core";
+import getStorage from "../utils/Storage.js";
+import processMarkdown from "../utils/Markdown.js";
+import Layout from "../layouts/Layout.astro";
+
+const docId = new URL(Astro.request.url).searchParams.get("id");
+const title = docId.endsWith(".md") ? docId.slice(0, -3) : docId;
+const user = getUser({ server: Astro.request });
+let html;
+let docPath;
+if (user && docId)
+	try {
+		const storage = getStorage(user.token);
+		const doc = await storage.getItem(docId);
+		if (doc) {
+			const [path, markdown] = Object.entries(doc)[0];
+			docPath = path;
+			html = await processMarkdown(markdown);
+		}
+	} catch (e) {}
+const article = html || "Something happened, can not show document.";
+---
+
+<Layout title={title} page="doc">
+	<article
+		class="prose prose-xl prose-zinc dark:prose-invert prose-a:text-green-500 prose-a:no-underline pb-12"
+	>
+		<a href="/home">{docPath.split("/").join(" / ").replace(/.md$/, "")}</a>
+	</article>
+	<article
+		class="prose prose-xl prose-zinc dark:prose-invert prose-a:text-green-500 prose-a:no-underline"
+	>
+		{article}
+	</article>
+</Layout>

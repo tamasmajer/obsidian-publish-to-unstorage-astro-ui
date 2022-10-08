@@ -1,0 +1,39 @@
+---
+// const body=await request.text()
+// console.log(body)
+---
+
+<html>
+    <head>
+        <script is:raw>
+            function send(text) {
+                openWindowWithPost("http://localhost:3000/posted", {
+                    markdown: text,
+                });
+            }
+            function openWindowWithPost(url, data) {
+                var form = document.createElement("form");
+                form.target = "_blank";
+                form.method = "POST";
+                form.action = url;
+                form.style.display = "none";
+
+                for (var key in data) {
+                    var input = document.createElement("input");
+                    input.type = "hidden";
+                    input.name = key;
+                    input.value = data[key];
+                    form.appendChild(input);
+                }
+
+                document.body.appendChild(form);
+                form.submit();
+                document.body.removeChild(form);
+            }
+        </script>
+    </head>
+    <body>
+        <textarea id="text">he llo</textarea>
+        <button onclick="send(getElementById('text').value)">send</button>
+    </body>
+</html>

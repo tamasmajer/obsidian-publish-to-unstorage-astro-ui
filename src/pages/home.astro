@@ -1,0 +1,65 @@
+---
+import SignIn from "../components/SignIn.jsx";
+import SignOut from "../components/SignOut.jsx";
+import { getUser } from "@astro-auth/core";
+import getStorage from "../utils/Storage";
+import Layout from "../layouts/Layout.astro";
+
+const user = getUser({ server: Astro.request });
+let docs;
+if (user) {
+	try {
+		let storage = getStorage(user.token);
+		docs = await storage.getKeys();
+	} catch (e) {}
+}
+---
+
+<Layout title="Home" page="home">
+	<article
+		class="prose prose-xl prose-zinc dark:prose-invert prose-a:text-green-500 prose-a:no-underline"
+	>
+		<div class="grid grid-cols-2 gap-8">
+			<div class="col-span-1 _bg-white">
+				{user && <b>Documents:</b>}
+				{user && !docs && <div>You don't have any documents yet.</div>}
+				{
+					docs && (
+						<ul>
+							{docs.map((doc) => (
+								<li>
+									<a
+										href={
+											"/doc?id=" +
+											encodeURIComponent(doc) +
+											"&x"
+										}
+									>
+										{doc.replace(/.md$/, "")}
+									</a>
+								</li>
+							))}
+						</ul>
+					)
+				}
+			</div>
+			<div class="col-span-1 bg-white pt-5 pb-5 rounded-lg text-center">
+				<div class="pb-10">
+					<div class="pb-4">
+						You are {user ? "" : "not"} signed in.
+					</div>
+					{!user && <SignIn client:load />}
+					{user && <SignOut client:load />}
+				</div>
+				{
+					user && (
+						<>
+							<div>Your API Key is:</div>
+							<div>{user && user.token}</div>
+						</>
+					)
+				}
+			</div>
+		</div>
+	</article>
+</Layout>

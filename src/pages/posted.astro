@@ -1,0 +1,15 @@
+---
+import processMd from "../utils/Markdown.js";
+const body = await Astro.request.text();
+const text = new URLSearchParams(body).get("markdown");
+const html = processMd(text);
+---
+
+<html>
+    <head>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        {html}
+    </body>
+</html>
