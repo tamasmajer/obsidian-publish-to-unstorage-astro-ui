@@ -9,7 +9,7 @@ const title = docId.endsWith(".md") ? docId.slice(0, -3) : docId;
 const user = getUser({ server: Astro.request });
 let html;
 let docPath;
-if (user && docId)
+if (user && docId) {
 	try {
 		const storage = getStorage(user.token);
 		const doc = await storage.getItem(docId);
@@ -19,7 +19,8 @@ if (user && docId)
 			html = await processMarkdown(markdown);
 		}
 	} catch (e) {}
-const article = html || "Something happened, can not show document.";
+}
+const article = html || "Something has happened, can not show document.";
 ---
 
 <Layout title={title} page="doc">
