@@ -18,3 +18,6 @@ This is a very limited POC version, it needs a proper markdown plugin setup to s
 
 ![Doc](./doc/doc.png)
 
+## Install
+
+Run `npm i` to install dependencies, and `npm run dev` to start locally. More info [here](https://github.com/tamasmajer/obsidian-publish-to-unstorage-plugin).
