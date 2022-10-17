@@ -2,6 +2,14 @@
 
 This project is a part of an open architecture design to publish documents from [Obsidian](https://obsidian.md). As mentioned in the [plugin](https://github.com/tamasmajer/obsidian-publish-to-unstorage-plugin), on this website the user can authenticate, get an API key, and view a published set of documents saved in an intermediary Unstorage server.
 
+## About page
+
 ![About](./doc/about.png)
+
+## Authentication page
+
 ![Home](./doc/home.png)
+
+## Markdown viewer
+
 ![Doc](./doc/doc.png)
